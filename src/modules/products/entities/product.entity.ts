@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
-import { Money } from '../../utils/money';
+import { Money } from '../../../utils/money';
 
 @Entity()
 export class Product {

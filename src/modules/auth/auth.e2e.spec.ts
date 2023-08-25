@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppModule } from '../app.module';
+import { AppModule } from '../../app.module';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AuthService } from './auth.service';
-import { mainConfig } from '../main.config';
+import { mainConfig } from '../../main.config';
 
 const USER_USERNAME = 'username';
 const USER_PASSWORD = 'password';

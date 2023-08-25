@@ -3,8 +3,8 @@ import 'dotenv/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-import { Product } from '../src/products/entities/product.entity';
-import { User } from '../src/users/entities/user.entity';
+import { Product } from '../src/modules/products/entities/product.entity';
+import { User } from '../src/modules/users/entities/user.entity';
 
 export const dataSourceConfig: TypeOrmModuleOptions = {
   type: 'better-sqlite3',

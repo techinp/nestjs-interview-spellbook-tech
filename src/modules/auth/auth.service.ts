@@ -3,6 +3,7 @@ import { compareSync, hashSync } from 'bcrypt';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/entities/user.entity';
 import { AuthDto } from './dto/auth.dto';
+import { instanceToPlain } from 'class-transformer';
 
 const SALT_ROUNDS = 10;
 
@@ -12,6 +13,7 @@ export class AuthService {
 
   async validateUser(username: string, password: string): Promise<User | null> {
     const user = await this.usersService.findOneByUsername(username);
+    console.log('user :', user);
 
     if (user && compareSync(password, user.encryptedPassword)) {
       return user;
@@ -25,4 +27,8 @@ export class AuthService {
 
     return this.usersService.create({ username, encryptedPassword });
   }
+
+  // async signIn({ username, password }: AuthDto) {
+
+  // }
 }
