@@ -47,7 +47,6 @@ export class ProductsService {
   }
 
   update(product: Product, updateProduct: UpdateProduct) {
-    console.log('updateProduct :', updateProduct);
     return this.productsRepository.save({ ...product, ...updateProduct });
   }
 

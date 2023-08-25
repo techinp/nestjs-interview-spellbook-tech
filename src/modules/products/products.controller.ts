@@ -61,8 +61,6 @@ export class ProductsController {
     const categories = await this.categoriesService.findItemsByIds(
       updateProductDto.categories,
     );
-    console.log('categories :', categories);
-
     const updateProduct: UpdateProduct = {
       ...updateProductDto,
       categories,

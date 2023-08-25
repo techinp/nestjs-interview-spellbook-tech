@@ -13,7 +13,6 @@ export class AuthService {
 
   async validateUser(username: string, password: string): Promise<User | null> {
     const user = await this.usersService.findOneByUsername(username);
-    console.log('user :', user);
 
     if (user && compareSync(password, user.encryptedPassword)) {
       return user;
