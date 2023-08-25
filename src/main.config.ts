@@ -9,7 +9,12 @@ import { EntityInvalidFilter } from './utils/filters/entity-invalid.filter';
 import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
 
 export function mainConfig(app: INestApplication) {
-  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      transformOptions: { enableImplicitConversion: true },
+    }),
+  );
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   app.useGlobalFilters(
     new EntityNotFoundErrorFilter(),

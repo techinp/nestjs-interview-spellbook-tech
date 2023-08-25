@@ -11,6 +11,7 @@ export class CreateProducts1692536718788 implements MigrationInterface {
         "description" varchar NOT NULL,
         "price_subunit" integer NOT NULL,
         "price_currency" varchar NOT NULL,
+        "categories"
         "created_at" datetime NOT NULL DEFAULT (datetime('now')),
         "updated_at" datetime NOT NULL DEFAULT (datetime('now'))
       )`,

@@ -6,17 +6,24 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
+  BadRequestException,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { UpdateProductDto } from './dto/update-product.dto';
+import { UpdateProductDto, UpdateProduct } from './dto/update-product.dto';
+import { GetFilterProductDto } from './dto/get-filters-product.dto';
+import { CategoriesService } from '../categories/categories.service';
 
 @ApiTags('Products')
 @ApiBearerAuth()
 @Controller('products')
 export class ProductsController {
-  constructor(private readonly productsService: ProductsService) {}
+  constructor(
+    private readonly productsService: ProductsService,
+    private readonly categoriesService: CategoriesService,
+  ) {}
 
   /*
    * TODO: Add ability to filter by name to this controller action.
@@ -26,8 +33,8 @@ export class ProductsController {
    */
 
   @Get()
-  index() {
-    return this.productsService.findAll();
+  getProductByFilter(@Query() query: GetFilterProductDto) {
+    return this.productsService.findAll(query);
   }
 
   @Post()
@@ -51,8 +58,17 @@ export class ProductsController {
     @Body() updateProductDto: UpdateProductDto,
   ) {
     const product = await this.productsService.findOne(id);
+    const categories = await this.categoriesService.findItemsByIds(
+      updateProductDto.categories,
+    );
+    console.log('categories :', categories);
 
-    return this.productsService.update(product, updateProductDto);
+    const updateProduct: UpdateProduct = {
+      ...updateProductDto,
+      categories,
+    };
+
+    return this.productsService.update(product, updateProduct);
   }
 
   @Delete(':id')

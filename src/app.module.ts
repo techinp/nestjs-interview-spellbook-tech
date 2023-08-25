@@ -8,6 +8,7 @@ import { CurrentUserModule } from './modules/current-user/current-user.module';
 import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
 import { appConfig } from '../config/app.config';
+import { CategoriesModule } from './modules/categories/categories.modules';
 
 @Module({
   controllers: [AppController],
@@ -17,6 +18,7 @@ import { appConfig } from '../config/app.config';
     UsersModule,
     CurrentUserModule,
     ProductsModule,
+    CategoriesModule,
     ConfigModule.forRoot({
       envFilePath: ['.env'],
       isGlobal: true,
